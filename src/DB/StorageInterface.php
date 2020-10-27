@@ -20,9 +20,23 @@ interface StorageInterface {
     public function findOne($schema, array $conditions);
 
     /**
-     * @param $schema Condition[] $conditions
+     * @param string $schema
+     * @param Condition[] $conditions
      * @return array
      */
     public function find($schema, array $conditions);
 
+    /**
+     * @param string $schema
+     * @return array
+     */
+    public function findAll($schema);
+
+    /**
+     * @param string $schema
+     * @param Condition[] $conditions
+     * @param array $data
+     * @return Bool
+     */
+    public function updateOne(string $schema, array $conditions, array $data);
 }

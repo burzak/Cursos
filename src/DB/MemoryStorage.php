@@ -55,6 +55,27 @@ final class MemoryStorage implements StorageInterface {
         return $out;
     }
 
+    public function findAll($schema) {
+        if (empty($this->db[$schema])) {
+            return array();
+        }
+        return $this->db[$schema];
+    }
+
+    public function updateOne(string $schema, array $conditions, array $data) {
+        $key = null;
+        foreach($this->db[$schema] as $k => $row) {
+            if ($this->fitAll($row, $conditions)) {
+                $key = $k;
+            }
+        }
+        if (!is_null($key)) {
+            $this->db[$schema][$key] = $data;
+            return True;
+        }
+        return False;
+    }
+
     /**
      * @param array $row
      * @param Condition[] $conditions

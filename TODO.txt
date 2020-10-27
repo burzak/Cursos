@@ -1,0 +1,81 @@
+Pantallas:
+- admin (admin/123456)
+    - Empleados
+        - ABM
+    - Cursos
+        - ABM
+        - Dictado
+            - ABM
+    - Asignacion de Cursos
+        - Asigna un empleado a un dictado de curso
+    - Pedidos
+        - Listado
+- public
+    - Login
+    - Pedidos
+        - Alta
+
+DB
+==
+
+Empleados:
+    - Nombre
+    - Apellido
+    - Email *
+    - Puesto
+    - Programa
+    - activo
+Cursos:
+    - IdCurso *
+    - Nombre
+    - Descripcion
+Dictado:
+    - idDictado *
+    - idCurso
+    - fechaInicio
+    - fechaFin
+    - activo (0/1)
+DictadoHasEmpleado:  Empleado n - m Dictado
+    - email *
+    - idDictado *
+Pedidos:
+    - idPedido *
+    - email
+    - descripcion
+    - visible (0/1)
+
+
+
+Servicios:
+- LoginService
+    register
+    userExists
+    logIn
+    isLogged
+- EmpleadoService
+    register(nombre, apellido...) : Empleado
+    update(Empleado) : Empleado
+    delete(Empleado) : Empleado
+    findOne(email*) : Empleado
+    findAll() : Empleado[]
+- CursoService
+    register(nombre, descripcion) : Curso
+    update(Curso) : Curso
+    findOne(id) : Curso
+    findAll() : Curso[]
+- DictadoService
+    register(Curso, fechaInicio, fechaFin): Dictado
+    update(Dictado) : Dictado
+    deactive(Dictado) : Dictado
+    activate(Dictado) : Dictado
+    findOne(idDictado) : Dictado
+    findAll(Curso) : Dictado[]
+    addEmployee(Dictado, Employee) : Dictado
+    removeEmployee(Dictado, Employee) : Bool
+    findParticipants(Dictado) : Employee[]
+- PedidosService
+    register(email, descripcion) : Pedidos
+    hide(Pedido) : Bool
+    findAll() : Pedidos[]
+
+
