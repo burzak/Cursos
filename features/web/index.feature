@@ -6,5 +6,5 @@ Característica: Pagina principal
 
   Escenario: Puedo entrar a la home de la aplicacion
     Dado estoy en la página de inicio
-    Entonces debo ver "Bienvenidos a la pagina de cursos"
+    Entonces debo ver "Bienvenidos"
     

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'template_folder' => (dirname(__FILE__).'/../templates/'),
+    'template_folder' => dirname(__FILE__).'/../templates/',
     'Twig\Loader\LoaderInterface' =>
             \DI\autowire('Twig\Loader\FilesystemLoader')->constructor(\DI\get('template_folder')
     ),
