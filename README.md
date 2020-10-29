@@ -10,6 +10,12 @@ Acá estan las instrucciones (https://getcomposer.org/download/)
     php -r "unlink('composer-setup.php');"
 
 
+## Dependencias de php
+
+```
+sudo apt-get install php-xml php-mbstring
+```
+
 ## Actualizamos las dependencias
 
     php composer.phar update
