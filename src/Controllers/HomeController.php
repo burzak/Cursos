@@ -14,10 +14,8 @@ final class HomeController {
     private $templateEngine;
 
     // constructor receives container instance
-    public function __construct(\Cursos\Templates\TemplateEngineInterface $templateEngine,
-                                \Cursos\Services\LoginService $l) {
+    public function __construct(\Cursos\Templates\TemplateEngineInterface $templateEngine) {
         $this->templateEngine = $templateEngine;
-        $this->l = $l;
     }
  
     public function index(ResponseInterface $response): ResponseInterface {
