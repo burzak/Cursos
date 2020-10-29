@@ -30,14 +30,19 @@ final class Employee implements \Cursos\DB\SerializeInterface {
      */
     private $programa;
     
+    /**
+     * @var integer
+     */
+    private $activo;
 
-    public function __construct(string $email, string $nombre, string $apellido, string $puesto, string $programa) {
+    public function __construct(string $email, string $nombre, string $apellido, string $puesto, string $programa, int $activo) {
 
         $this->email = $email;
         $this->nombre = $nombre;
         $this->apellido = $apellido;
         $this->puesto = $puesto;
         $this->programa = $programa;
+        $this->activo = $activo;
     }
 
     /**
@@ -75,6 +80,12 @@ final class Employee implements \Cursos\DB\SerializeInterface {
         return $this->programa;
     }
 
+     /**
+     * @return string
+     */
+    public function getActivo() {
+        return $this->activo;
+    }
     
     public function asArray() {
         return array(
@@ -83,6 +94,7 @@ final class Employee implements \Cursos\DB\SerializeInterface {
             'apellido' => $this->apellido,
             'puesto' => $this->puesto,
             'programa' => $this->programa,
+            'activo' => $this->activo,
         );
     }
 

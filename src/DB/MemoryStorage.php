@@ -64,6 +64,9 @@ final class MemoryStorage implements StorageInterface {
 
     public function updateOne(string $schema, array $conditions, array $data) {
         $key = null;
+        if(empty($this->db[$schema])){
+            return False;
+        }
         foreach($this->db[$schema] as $k => $row) {
             if ($this->fitAll($row, $conditions)) {
                 $key = $k;

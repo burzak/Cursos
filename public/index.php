@@ -13,9 +13,7 @@ if (PHP_SAPI == 'cli-server') {
     if (is_file($file)) return false;
 }
 
-$containerBuilder = new \DI\ContainerBuilder();
-$containerBuilder->addDefinitions(dirname(__FILE__).'/../config/globalconfig.php');
-$container = $containerBuilder->build();
+$container = \Cursos\ContainerFactory::create();
 
 $app = \DI\Bridge\Slim\Bridge::create($container);
 
