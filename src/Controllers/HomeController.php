@@ -2,9 +2,7 @@
 
 namespace Cursos\Controllers;
 
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 
 final class HomeController {
     

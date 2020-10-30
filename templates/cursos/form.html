@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Formulario de curso</h1>
+    <form action="/cursos/process/" method="post">
+        <input type="hidden" name="idCurso" {% if curso %}value="{{ curso.idCurso }}"{% endif %}>
+        <label>Nombre</label>
+        <input type="text" name="name" {% if curso %}value="{{ curso.name }}"{% endif %}>
+        <label>Descripción</label>
+        <input type="text" name="description" {% if curso %}value="{{ curso.description }}"{% endif %}>
+        <input type="submit" name="submit" value="Continuar">
+    </form>
+    <p><a href="/cursos/">Volver a listado</a></p>
+{% endblock %}
