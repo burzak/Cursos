@@ -30,6 +30,10 @@ final class EmpleadoServiceTest extends \PHPUnit\Framework\TestCase {
         $this->service = new \Cursos\Services\EmpleadoService($this->db);
     }
 
+    protected function tearDown() : void {
+        $this->db->dropDB();
+    }
+
     public function testCanRegisterARequest() {
 
         $empleado =  $this->service->register("Email@Email.com","Pedro","Garcia","Programador","PGS",1);

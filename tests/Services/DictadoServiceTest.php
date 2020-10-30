@@ -27,6 +27,10 @@ final class DictadoServiceTest extends \PHPUnit\Framework\TestCase {
         $this->dictadoService = new \Cursos\Services\DictadoService($this->db, $this->cursoService);
     }
 
+    protected function tearDown() : void {
+        $this->db->dropDB();
+    }
+
     public function testExists() {
         $this->assertTrue(class_exists("Cursos\Services\DictadoService"));
     }

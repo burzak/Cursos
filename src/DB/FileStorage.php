@@ -2,10 +2,28 @@
 
 namespace Cursos\DB;
 
-final class MemoryStorage implements StorageInterface {
+final class FileStorage implements StorageInterface {
 
     private $db = array();
 
+    public function __construct(string $path) {
+        $this->path = $path;
+    }
+
+    private function getData() {
+        if (!\file_exists($this->getFile())) {
+            return array();
+        }
+        return unserialize(\file_get_contents($this->getFile()));
+    }
+
+    /**
+     * @return Bool
+     */
+    private function saveData(array $db) {
+        $status = \file_put_contents($this->getFile(), serialize($db));
+        return $status !== False;
+    }
 
     /**
      * @param string $schema
@@ -13,11 +31,14 @@ final class MemoryStorage implements StorageInterface {
      * @return Bool
      */
     public function save($schema, array $data) {
-        if (empty($this->db[$schema])) {
-            $this->db[$schema] = array();
+        $db = $this->getData();
+
+        if (empty($db[$schema])) {
+            $db[$schema] = array();
         }
-        $this->db[$schema][] = $data;
-        return true;
+        $db[$schema][] = $data;
+
+        return $this->saveData($db);
     }
 
     /**
@@ -26,10 +47,11 @@ final class MemoryStorage implements StorageInterface {
      * @return array
      */
     public function findOne($schema, array $conditions) {
-        if (empty($this->db[$schema])) {
+        $db = $this->getData();
+        if (empty($db[$schema])) {
             return array();
         }
-        foreach($this->db[$schema] as $row) {
+        foreach($db[$schema] as $row) {
             if ($this->fitAll($row, $conditions)) {
                 return $row;
             }
@@ -42,12 +64,13 @@ final class MemoryStorage implements StorageInterface {
      * @return array
      */
     public function find($schema, array $conditions) {
-        if (empty($this->db[$schema])) {
+        $db = $this->getData();
+        if (empty($db[$schema])) {
             return array();
         }
         
         $out = array();
-        foreach($this->db[$schema] as $row) {
+        foreach($db[$schema] as $row) {
             if ($this->fitAll($row, $conditions)) {
                 $out[] = $row;
             }
@@ -56,25 +79,28 @@ final class MemoryStorage implements StorageInterface {
     }
 
     public function findAll($schema) {
-        if (empty($this->db[$schema])) {
+        $db = $this->getData();
+        if (empty($db[$schema])) {
             return array();
         }
-        return $this->db[$schema];
+        return $db[$schema];
     }
 
     public function updateOne(string $schema, array $conditions, array $data) {
+        $db = $this->getData();
+
         $key = null;
-        if(empty($this->db[$schema])){
+        if(empty($db[$schema])){
             return False;
         }
-        foreach($this->db[$schema] as $k => $row) {
+        foreach($db[$schema] as $k => $row) {
             if ($this->fitAll($row, $conditions)) {
                 $key = $k;
             }
         }
         if (!is_null($key)) {
-            $this->db[$schema][$key] = $data;
-            return True;
+            $db[$schema][$key] = $data;
+            return $this->saveData($db);
         }
         return False;
     }
@@ -125,11 +151,14 @@ final class MemoryStorage implements StorageInterface {
         return false;
     }
 
+    private function getFile() {
+        return $this->path . "db.dump";
+    }
+
     /**
      * @return Bool
      */
     public function dropDB() {
-        $this->db = array();
-        return True;
+        return $this->saveData(array());
     }
 }

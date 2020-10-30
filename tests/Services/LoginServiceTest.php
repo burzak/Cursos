@@ -18,6 +18,10 @@ final class LoginServiceTest extends \PHPUnit\Framework\TestCase {
         $_SESSION = array();
     }
 
+    protected function tearDown() : void {
+        $this->db->dropDB();
+    }
+
     public function testRegisterUser() {
         $r = $this->loginService->register('admin', '123456');
         $this->assertTrue($r);

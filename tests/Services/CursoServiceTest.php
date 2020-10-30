@@ -15,8 +15,12 @@ final class CursoServiceTest extends \PHPUnit\Framework\TestCase {
 
 
     protected function setUp() : void {
-        $this->db = new \Cursos\DB\MemoryStorage();
+        $this->db = new \Cursos\DB\FileStorage(dirname(__FILE__).'/../../config/');
         $this->service = new \Cursos\Services\CursoService($this->db);
+    }
+
+    protected function tearDown() : void {
+        $this->db->dropDB();
     }
 
     public function testExists() {

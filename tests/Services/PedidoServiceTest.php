@@ -29,6 +29,10 @@ final class PedidoServiceTest extends \PHPUnit\Framework\TestCase {
         $this->service = new \Cursos\Services\PedidoService($this->db);
     }
 
+    protected function tearDown() : void {
+        $this->db->dropDB();
+    }
+
     public function testCanRegisterARequest() {
         $pedido = $this->service->register("mail@mail.com", "desc");
 

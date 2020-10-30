@@ -39,4 +39,9 @@ interface StorageInterface {
      * @return Bool
      */
     public function updateOne(string $schema, array $conditions, array $data);
+
+    /**
+     * @return Bool
+     */
+    public function dropDB();
 }
