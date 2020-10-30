@@ -11,7 +11,7 @@ final class FileStorageTest extends \PHPUnit\Framework\TestCase {
     private $db;
 
     protected function setUp() : void {
-        $this->db = new \Cursos\DB\FileStorage(dirname(__FILE__).'/../../config/');
+        $this->db = new \Cursos\DB\FileStorage(dirname(__FILE__).'/test.dump');
     }
 
     protected function tearDown() : void {

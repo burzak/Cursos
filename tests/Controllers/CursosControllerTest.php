@@ -8,6 +8,9 @@ use Slim\Psr7\Factory\RequestFactory;
 final class CursosControllerTest extends \PHPUnit\Framework\TestCase {
     protected function setUp() : void {
         $container = \Cursos\ContainerFactory::create();
+        $container->set('Cursos\DB\StorageInterface',
+                        \DI\autowire('Cursos\DB\FileStorage')->constructor(\DI\get('test_db_file')));
+
         $this->controller = $container->get("Cursos\Controllers\CursosController");
         $this->cursoService = $container->get("Cursos\Services\CursoService");
         $app = AppFactory::create();

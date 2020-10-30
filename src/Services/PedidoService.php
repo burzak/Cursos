@@ -18,7 +18,7 @@ final class PedidoService {
     }
 
     public function register($email, $description) {
-        $id = microtime() . rand();
+        $id = time() . rand();
         $pedido = new \Cursos\Models\Pedido($id, $email, $description);
         $this->db->save(self::$schema, $pedido->asArray());
         return $pedido;

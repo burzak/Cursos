@@ -25,7 +25,7 @@ final class DictadoService {
     }
 
     public function register($curso, $fechaInicio, $fechaFin) {
-        $idDictado = microtime() . rand();
+        $idDictado = time() . rand();
         $dictado = new \Cursos\Models\Dictado($idDictado, $curso, $fechaInicio, $fechaFin, 1);
         $this->db->save(self::$schema, $dictado->asArray());
         return $dictado;

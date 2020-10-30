@@ -18,7 +18,7 @@ final class CursoService {
     }
 
     public function register($name, $description) {
-        $idCurso = microtime() . rand();
+        $idCurso = time() . rand();
         $curso = new \Cursos\Models\Curso($idCurso, $name, $description);
         $this->db->save(self::$schema, $curso->asArray());
         return $curso;

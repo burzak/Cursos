@@ -5,23 +5,24 @@ namespace Cursos\DB;
 final class FileStorage implements StorageInterface {
 
     private $db = array();
+    private $path;
 
-    public function __construct(string $path) {
-        $this->path = $path;
+    public function __construct(string $dbPath) {
+        $this->path = $dbPath;
     }
 
     private function getData() {
-        if (!\file_exists($this->getFile())) {
+        if (!\file_exists($this->path)) {
             return array();
         }
-        return unserialize(\file_get_contents($this->getFile()));
+        return unserialize(\file_get_contents($this->path));
     }
 
     /**
      * @return Bool
      */
     private function saveData(array $db) {
-        $status = \file_put_contents($this->getFile(), serialize($db));
+        $status = \file_put_contents($this->path, serialize($db));
         return $status !== False;
     }
 
@@ -149,10 +150,6 @@ final class FileStorage implements StorageInterface {
             break;
         }
         return false;
-    }
-
-    private function getFile() {
-        return $this->path . "db.dump";
     }
 
     /**

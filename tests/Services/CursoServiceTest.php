@@ -15,7 +15,7 @@ final class CursoServiceTest extends \PHPUnit\Framework\TestCase {
 
 
     protected function setUp() : void {
-        $this->db = new \Cursos\DB\FileStorage(dirname(__FILE__).'/../../config/');
+        $this->db = new \Cursos\DB\FileStorage(dirname(__FILE__).'/test.dump');
         $this->service = new \Cursos\Services\CursoService($this->db);
     }
 
