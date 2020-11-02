@@ -1,81 +1,107 @@
-Pantallas:
-- admin (admin/123456)
+Pantallas
+=========
+
+- admin:
     - Empleados
         - ABM
-    - Cursos
-        - ABM
-        - Dictado
-            - ABM
-    - Asignacion de Cursos
-        - Asigna un empleado a un dictado de curso
+    - cursos
+        - ABM (altas, bajas, modificaciones)
+        - Lotes de dictado
+            - asignar Empleados
     - Pedidos
-        - Listado
-- public
-    - Login
+        - Listado 
+        - Borrado/Edit
+
+- public:
+    - login de admin (admin/123456)
+    - cursos disponibles
     - Pedidos
         - Alta
 
 DB
 ==
-
-Empleados:
-    - Nombre
-    - Apellido
-    - Email *
-    - Puesto
-    - Programa
-    - activo
-Cursos:
-    - IdCurso *
-    - Nombre
-    - Descripcion
-Dictado:
-    - idDictado *
-    - idCurso
-    - fechaInicio
-    - fechaFin
-    - activo (0/1)
-DictadoHasEmpleado:  Empleado n - m Dictado
-    - email *
-    - idDictado *
 Pedidos:
     - idPedido *
     - email
-    - descripcion
-    - visible (0/1)
+    - curso_texto
+    - active
+Empleados:
+    - Nombre
+    - Apellido
+    - email *
+    - Puesto
+    - Programa
+
+Cursos:
+    - idCurso *
+    - Nombre
+    - Descripcion
+    - Duracion (ejemplo "15hs")
+
+Lotes:
+    - idLote *
+    - idCurso
+    - fecha inicio
+    - fecha fin
+
+LoteXEmpleado:
+    - idLote *
+    - email *
 
 
+
+Empleados:
+Email - Nombre
+uno@uno.com  - Dario
+dos@dos.com  - Diego
+tres@tres.com  - Eli Venezolano
+cuatro@cuatro.com  - Mati
+
+Cursos:
+idCurso - Nombre
+1       - Macrame
+2       - Angular
+
+Lotes:
+idLote - idCurso - fecha
+101    - 1       - xxxx
+102    - 1       - yyyy
+103    - 2       - zzzz
+
+LoteXEmpleado:
+idLote - email
+102    - uno@uno.com
+102    - dos@dos.com
+103    - dos@dos.com
 
 Servicios:
 - LoginService
-    register
+    register(username, password)
     userExists
     logIn
     isLogged
 - EmpleadoService
-    register(nombre, apellido...) : Empleado
+    register(email, nombre, apellido, puesto, programa, activo) : Empleado
     update(Empleado) : Empleado
     delete(Empleado) : Empleado
     findOne(email*) : Empleado
     findAll() : Empleado[]
-- CursoService
-    register(nombre, descripcion) : Curso
+- CursosService
+    register(nombre, descripcion, duracion) : Curso
     update(Curso) : Curso
-    findOne(id) : Curso
+    findOne(idCurso) : Curso
     findAll() : Curso[]
-- DictadoService
-    register(Curso, fechaInicio, fechaFin): Dictado
-    update(Dictado) : Dictado
-    deactive(Dictado) : Dictado
-    activate(Dictado) : Dictado
-    findOne(idDictado) : Dictado
-    findAll(Curso) : Dictado[]
-    addEmployee(Dictado, Employee) : Dictado
-    removeEmployee(Dictado, Employee) : Bool
-    findParticipants(Dictado) : Employee[]
+- LotesService
+    register(idCurso, fecha inicio, fecha fin) : Lote
+    update(Lote) : Lote
+    findOne(idLote): Lote
+    findAll() : Lote[]
+    addEmployee(Lote, Employee) : Bool
+    removeEmployee(Lote, Employee) : Bool
+    findAllEmployee(Lote) : Employee[]
+    findLotes(Employee): Lote[] ** no implementar por ahora
 - PedidosService
-    register(email, descripcion) : Pedidos
-    hide(Pedido) : Bool
-    findAll() : Pedidos[]
-
-
+    register(email, curso_texto): Pedido
+    findOne(idPedido) : Pedido
+    findAll(): Pedido[]
+    hide(Pedido): Pedido
