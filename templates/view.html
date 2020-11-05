@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Descripción
+            </th>
+            <th>
+                Duración
+            </th>
+            <th>
+                Editar
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for curso in cursos %}
+            <tr>
+                <td>
+                    {{curso.nombre}}
+                </td>
+                <td>
+                    {{curso.descripcion}}
+                </td>
+                <td>
+                    {{curso.duracion}}
+                </td>
+                <td>
+                    <a href="/cursos/edit/{{curso.id}}">Editar</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

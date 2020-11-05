@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form method="POST" action="/cursos/process">
+        <label>Nombre</label>
+        <input name="nombre" type="text"><br>
+        <label>Descripcion</label>
+        <input name="descripcion" type="text"><br>
+        <label>Duracion</label>
+        <input name="duracion" type="text"><br>
+        <input type="submit" value="Registrar">
+    </form>
+{% endblock %}
