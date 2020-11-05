@@ -20,7 +20,7 @@ final class PedidosService {
 
     public function register($email,$texto) {
         $id = time() . \rand();
-        $pedido = new Pedido($email,$texto,$id);
+        $pedido = new Pedido($email,$texto,$id,1);
         $this->db->save(self::$schema,$pedido->asArray());
         return $pedido;
     }
@@ -31,7 +31,7 @@ final class PedidosService {
         );
         $d = $this->db->findOne(self::$schema, $conditions);        
             
-        $out = new \Cursos\Models\Pedido($d['email'], $d['texto'], $d['id']);
+        $out = new \Cursos\Models\Pedido($d['email'], $d['texto'], $d['id'],$d['active']);
     
         return $out;
     }
@@ -40,12 +40,26 @@ final class PedidosService {
         $data = $this->db->findAll(self::$schema);
         $out = array();
         foreach($data as $d) {
-            if ($d['activo'] == 1) {
-                $out[] = new \Cursos\Models\Pedido($d['email'], $d['texto'], $d['id']);
+            if ($d['active'] == 1) {
+                $out[] = new \Cursos\Models\Pedido($d['email'], $d['texto'], $d['id'],$d['active']);
             }
         }
         return $out;
     }
 
+    public function hide(Pedido $pedido)
+    {
+        
+        $newPedido = new Pedido($pedido->getEmail(), $pedido->getTexto(),$pedido->getId(),0);
+        
+        $conditions = array(
+            new \Cursos\DB\Condition('id', '=', $newPedido->getId())
+        );
 
+        if($this->db->updateOne(self::$schema, $conditions, $newPedido->asArray())){
+            return $newPedido;
+        }
+
+        return null;
+    }
 }
