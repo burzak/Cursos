@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form method="POST" action="/cursos/processEdit">
+        <input name="idCurso" type="text" value="{{curso.idCurso}}" hidden><br>
+        <label>Nombre</label>
+        <input name="nombre" type="text" value = "{{curso.nombre}}"><br>
+        <label>Descripcion</label>
+        <input name="descripcion" type="text" value = "{{curso.descripcion}}"><br>
+        <label>Duracion</label>
+        <input name="duracion" type="text" value="{{curso.duracion}}"><br>
+        <input type="submit" value="Actualizar">
+    </form>
+{% endblock %}

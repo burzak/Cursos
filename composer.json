@@ -16,7 +16,7 @@
         "slim/slim": "*",
         "slim/psr7": "*",
         "php-di/php-di": "*",
-        "twig/twig": "^3.0",
+        "twig/twig": "*",
         "php-di/slim-bridge": "^3.0"
     }
 }

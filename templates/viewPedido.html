@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+
+    <thead>
+        <tr>
+            <th>
+                Email
+            </th>
+            <th>
+                Descripción
+            </th>
+            <th>
+                Activo
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in pedidos %}
+            <tr>
+                <td>
+                    {{pedido.email}}
+                </td>
+                <td>
+                    {{pedido.texto}}
+                </td>
+                <td>
+                    {{pedido.active}}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
