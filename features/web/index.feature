@@ -13,32 +13,54 @@ Característica: Pagina principal
     Entonces debo ver "Inicio"
     Y debo ver "Listado de pedidos"
     Y debo ver "Listado de cursos"
-
-  Escenario: Estoy en la home y puedo darle click al menu de cursos
-    Dado estoy en la página de inicio
-    Cuando sigo "menu-cursos"
-    Entonces debo ver "Listado de cursos"
-    Y debo ver "Id Curso"
-    Y debo ver "Nombre"
+  
+  Escenario: Estoy en la home y veo un menu
+    Dado sigo "Listado de pedidos"
+    Entonces debo ver "Email"
     Y debo ver "Descripción"
-    Y debo ver "Agregar"
-
-  Escenario: Puedo ver el formulario para crear cursos
-    Dado estoy en "/cursos"
-    Cuando sigo "Agregar"
-    Entonces debo ver "Formulario de curso"
-    Y debo ver "Nombre"
+    Y debo ver "Activo"
+  
+  Escenario: Estoy en la home y veo un menu
+    Dado sigo "Listado de cursos"
+    Entonces debo ver "Nombre"
     Y debo ver "Descripción"
-    Y debo ver un elemento "form > input[value=Continuar]"
-    Y debo ver "Volver a listado"
+    Y debo ver "Duración"
+    Y debo ver "Editar"
 
-  Escenario: Puedo crear un curso
-    Dado estoy en "/cursos"
-    Y sigo "Agregar"
-    Cuando relleno "name" con "curso desde behat"
-    Y relleno "description" con "descripcion desde behat"
-    Y presiono "Continuar"
-    Entonces debo ver "Todo joya!"
-    Y debo ver "Volver a listado"
-    Y debo ver "curso desde behat"
-    Y debo ver "descripcion desde behat"
+  Escenario: Estoy en la home y veo un menu
+    Dado sigo "Agregar Pedido"
+    Entonces debo ver un elemento "form"
+    Y debo ver "Email"
+    Y debo ver "Descripcion"
+    Y debo ver "Activo"
+
+  Escenario: Estoy en la home y veo un menu
+    Dado sigo "Agregar Curso"
+    Entonces debo ver un elemento "form"
+    Y debo ver "Descripcion"
+    Y debo ver "Duracion"
+    Y debo ver "Nombre"
+  
+  Escenario: Estoy en agregar pedido y relleno el formulario
+    Dado estoy en "/pedidos/add"
+    Cuando relleno "email" con "pepito@gmail.com"
+    Y relleno "texto" con "Among us"
+    Y marco "activo"
+    Y presiono "Registrar"
+    Entonces debo ver "Todo okaaa"
+    Y voy a "/pedidos/"
+    Y debo ver "pepito@gmail.com"
+    Y debo ver "Among us"
+    Y debo ver "1" 
+
+  Escenario: Estoy en agregar curso y relleno el formulario
+    Dado estoy en "/cursos/add"
+    Cuando relleno "nombre" con "Among Us"
+    Y relleno "descripcion" con "Quiero ser el traidor"
+    Y relleno "duracion" con "el tiempo que sea necesario"
+    Y presiono "Registrar"
+    Entonces debo ver "Todo okaaa"
+    Y voy a "/cursos/"
+    Y debo ver "Among Us"
+    Y debo ver "Quiero ser el traidor"
+    Y debo ver "el tiempo que sea necesario"

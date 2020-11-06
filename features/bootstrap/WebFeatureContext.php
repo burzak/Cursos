@@ -22,4 +22,14 @@ class WebFeatureContext extends RawMinkContext implements Context
     {
     }
 
+    /**
+    * @AfterScenario
+    */
+    public function acaLimpioLaBaseDeDatos()
+    {
+        if(file_exists(__DIR__ . "/../../config/prod.dump")){
+            unlink( __DIR__ . "/../../config/prod.dump");
+        }
+    }
+
 }
