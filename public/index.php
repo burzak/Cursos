@@ -20,8 +20,4 @@ $app->get('/cursos/edit/{idCurso}[/]', [\Cursos\Controllers\CursosController::cl
 $app->post('/cursos/process[/]', [\Cursos\Controllers\CursosController::class, 'formSubmit']);
 $app->post('/cursos/processEdit[/]', [\Cursos\Controllers\CursosController::class, 'editSubmit']);
 
-$app->get('/pedidos[/]', [\Cursos\Controllers\PedidosController::class, 'view']);
-$app->get('/pedidos/add[/]', [\Cursos\Controllers\PedidosController::class, 'form']);
-$app->post('/pedidos/process[/]', [\Cursos\Controllers\PedidosController::class, 'formSubmit']);
-
 $app->run();
