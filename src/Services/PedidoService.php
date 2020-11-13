@@ -38,9 +38,11 @@ final class PedidoService {
         $data = $this->db->find(self::$schema,$conditions);
         $out = array();
         foreach($data as $d) {
-           
+
                 $out[] = new \Cursos\Models\Pedido($d['idPedido'],$d['email'], $d['texto'], $d['status']);
             }
+
+        
         
         return $out;
 

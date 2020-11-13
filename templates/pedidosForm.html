@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>
+        formulario de pedidos
+    </h1>
+    <form method="POST" action="/pedidos/process">
+        <label>Email</label>
+        <input name="email" type="text"><br>
+        <label>Descripcion</label>
+        <input name="texto" type="text"><br>
+        <input type="submit" value="Registrar">
+    </form>
+{% endblock %}
